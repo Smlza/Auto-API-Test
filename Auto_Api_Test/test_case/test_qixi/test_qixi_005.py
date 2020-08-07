@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# @Time : 2020/8/7 16:24
+# @Time : 2020/8/7 16:56
 # @Author : turing
-# @File : test_qixi_003.py
-
+# @File : test_qixi_005.py
 import time
 import unittest
 import requests
@@ -10,7 +9,7 @@ from google.protobuf import json_format
 import NewBao_Activity_pb2
 class post_request(unittest.TestCase):
     def setUp(self):
-        print('七夕活动-积分抽奖奖品池接口开始')
+        print('七夕活动-活动页中奖广播接口开始')
         pass
 
     def api_time(self,a,b):
@@ -18,9 +17,9 @@ class post_request(unittest.TestCase):
 
     # 查看回报信息
     def test_01(self):
-        url='https://baogotest.turingsenseai.com/activity/doubleSeventhPrizePool'
+        url='https://baogotest.turingsenseai.com/activity/doubleSeventhBroadcast'
         headers={'content-type': 'application/x-protobuf'}
-        info=NewBao_Activity_pb2.TSDoubleSeventhPrizePoolRequest()
+        info=NewBao_Activity_pb2.TSDoubleSeventhBroadcastRequest()
         # info.pageNum = 1
         # info.pageSize = 10
 
@@ -32,7 +31,7 @@ class post_request(unittest.TestCase):
         info_datatime_after=time.time()
         print('接口耗时：%s ms' % self.api_time(info_datatime_after, info_datatime_before))
         if r.status_code is 200:
-            rep=NewBao_Activity_pb2.TSDoubleSeventhPrizePoolResponse()
+            rep=NewBao_Activity_pb2.TSDoubleSeventhBroadcastResponse()
             rep.ParseFromString(r.content)
             dic=json_format.MessageToDict(rep)
             for k ,v in dic.items():
@@ -46,5 +45,5 @@ class post_request(unittest.TestCase):
 
     def tearDown(self):
         print('==============================================')
-        print('七夕活动-积分抽奖奖品池接口结束')
+        print('七夕活动-活动页中奖广播接口结束')
         pass
